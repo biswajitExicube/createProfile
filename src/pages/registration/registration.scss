@@ -1,0 +1,28 @@
+page-registration {
+    .registrationContent{
+        background: url('../assets/imgs/loginBg.jpg') no-repeat top right -15vw;
+        background-size: cover;
+        ion-list{
+            border-radius: 6px;
+            overflow: hidden;
+            ion-item{
+                color: #fff;
+                background: rgba(0, 0, 0, 0.6);
+                font-size: 16px;
+            }
+            ion-item:first-child{
+                border-top: none !important;
+            }
+            ion-item:last-child{
+                border-bottom: none !important;
+            }
+        }
+        button{
+            background: #dedede;
+            margin: 10px auto;
+            display: block;
+            color: #555;
+            border-color: #dedede;
+        }        
+    }
+}
