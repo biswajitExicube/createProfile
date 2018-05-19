@@ -9,6 +9,24 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { LoginPageModule } from '../pages/login/login.module';
+import { RegistrationPageModule } from '../pages/registration/registration.module';
+import { UserDetailsPageModule } from '../pages/user-details/user-details.module';
+
+import * as firebase from 'firebase';
+
+
+var config = {
+  apiKey: "AIzaSyD1w95jYQESCSs1HNW5dQFNCJ1dkO8c2Mw",
+  authDomain: "createprofile-57893.firebaseapp.com",
+  databaseURL: "https://createprofile-57893.firebaseio.com",
+  projectId: "createprofile-57893",
+  storageBucket: "createprofile-57893.appspot.com",
+  messagingSenderId: "886845942496"
+};
+firebase.initializeApp(config);
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -18,6 +36,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    LoginPageModule,
+    RegistrationPageModule,
+    UserDetailsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

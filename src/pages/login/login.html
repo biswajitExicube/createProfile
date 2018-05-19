@@ -1,0 +1,28 @@
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content padding class="loginContent">
+  <div class="mainDiv">
+    <div class="childDiv">
+        <img src="assets/imgs/logo.png" alt="Image" class="logoImage">
+        <ion-list>
+          <ion-item>
+            <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-item no-lines class="btnItem">
+          <button ion-button large (click)="registration()">Registration</button>
+          <button ion-button large (click)="goLogin()" >Login</button>
+        </ion-item>
+    </div>
+  </div>
+</ion-content>
