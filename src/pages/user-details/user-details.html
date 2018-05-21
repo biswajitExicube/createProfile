@@ -8,16 +8,26 @@
 
   <ion-navbar>
     <ion-title>{{userDetails.firstName}} {{userDetails.lastName}}</ion-title>
+    <ion-buttons end>
+      <button ion-button clear small (click)="logOut()">Logout</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="userDetailsContent">
-<ion-card>
-  <ion-card-header>fdgdf</ion-card-header>
-  <ion-card-content>dfgdf</ion-card-content>
-</ion-card>
+<ion-list>
+  <ion-item *ngFor="let messege of messegeArray">
+    <ion-avatar item-start>
+      <img src="../../assets/imgs/user.jpg">
+      
+    </ion-avatar>
+    <h2>{{messege.messegeUser}}</h2>
+
+    <h3>{{messege.userMessege}}</h3>
+  </ion-item>
+</ion-list>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
