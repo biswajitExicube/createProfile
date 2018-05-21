@@ -43,8 +43,7 @@ constructor(public navCtrl: NavController, public navParams: NavParams,public lo
         this.items.push(newItem[k]);          
        }
         console.log(this.items);
-      }  
-        
+      }     
     });
   }
 

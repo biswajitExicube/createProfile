@@ -28,10 +28,8 @@ export class LoginPage {
     this.navCtrl.push(RegistrationPage)
   }
   goLogin(){
-
-    console.log(this.email);
-    console.log(this.password);
-    
+         console.log(this.email);
+         console.log(this.password);
          firebase.auth().signInWithEmailAndPassword(this.email, this.password).then( user => {
           if(user){
             console.log(user);

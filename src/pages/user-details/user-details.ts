@@ -44,22 +44,15 @@ export class UserDetailsPage {
       this.messegeArray.push(messeges[data]);
     }
     console.log(this.messegeArray);
-
   }
     });
-
-    
-  
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserDetailsPage');
-
   }
   sendMsg(){
     
     const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.currentUser);
-   
     personRef.on('value', personSnapshot => {
     console.log(personSnapshot.val()); 
     this.messegeUserName=personSnapshot.val().username;
