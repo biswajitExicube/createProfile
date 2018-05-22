@@ -9,28 +9,48 @@ import * as firebase from 'firebase'
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  public messegeUserName:any;
   public messegeArray:any;
+  public currentUser:any;
+  public items:any;
   constructor(public navCtrl: NavController) {
-    let currentUser = firebase.auth().currentUser.uid;
-    console.log(currentUser);
-    const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+currentUser);
+
+    this.currentUser = firebase.auth().currentUser.uid;
+    console.log(this.currentUser);
+    const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.currentUser);
     personRef.on('value', personSnapshot => {
-    console.log(personSnapshot.val());
     let messeges=personSnapshot.val().messege;
-    console.log(messeges);
     this.messegeArray=[];
     for(let data in messeges){
-      if(currentUser!=messeges[data].msguserId){
+      messeges[data].msgId=data;
+      // console.log(messeges[data]);
+      if(this.currentUser!=messeges[data].msguserId){
       this.messegeArray.push(messeges[data]);
     }
     console.log(this.messegeArray);
   }
-
     })
   }
   logOut(){
     this.navCtrl.setRoot(LoginPage);
     firebase.auth().signOut;
+    localStorage.removeItem("userName");
+  }
+  deleteMsg(i){
+    console.log(i);
+    console.log(this.messegeArray[i].msgId);
+     firebase.database().ref(`userProfile/`+this.currentUser+'/messege/' +this.messegeArray[i].msgId).remove();
   }
 }
+
+
+  
+    
+     
+    
+
+
+   
+ 
+
+

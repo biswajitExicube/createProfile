@@ -16,32 +16,44 @@ export class LoginPage {
   public email:any;
   public username:any;
   public password:any;
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
   registration(){
     this.navCtrl.push(RegistrationPage)
   }
   goLogin(){
-         console.log(this.email);
-         console.log(this.password);
+          if(this.email=="" || this.email==undefined){
+            alert("provide a valid email id");
+            }else if(this.password=="" || this.password==undefined){
+              alert("password is mandatory");
+            }else if(this.password.length<6){
+              alert("password should be more than 6 characters");
+            }
+            else{
          firebase.auth().signInWithEmailAndPassword(this.email, this.password).then( user => {
           if(user){
-            console.log(user);
-
+            var userId=user.user.uid
+            const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+userId);
+            personRef.on('value', personSnapshot => {
+              // console.log(personSnapshot.val());
+              var myData=personSnapshot.val().username;
+              console.log(myData);
+              localStorage.setItem("userName",myData);
+            })
             //alert("log successfull");
             this.navCtrl.setRoot(HomePage);
           }
+        
         })
         .catch((_error) => {
           console.log(_error);
+          alert(_error.message);
           console.log(_error.message)
         })
+      }
    
   }
 }

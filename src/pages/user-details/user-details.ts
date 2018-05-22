@@ -9,7 +9,7 @@ import { LoginPage } from '../login/login';
   selector: 'page-user-details',
   templateUrl: 'user-details.html',
 })
-export class UserDetailsPage {
+  export class UserDetailsPage {
   public userMsg: string;
   public userDetails: any;
   public messegeArray:any
@@ -29,7 +29,7 @@ export class UserDetailsPage {
     },700), 
   
     this.currentUser = firebase.auth().currentUser.uid;
-    console.log(this.currentUser)
+    console.log(this.currentUser);
     this.userDetails = this.navParams.get('userData');
     console.log(this.userDetails);
     const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.userDetails.userId);
@@ -37,7 +37,6 @@ export class UserDetailsPage {
     console.log(personSnapshot.val());
     
     let messeges=personSnapshot.val().messege
-    
     this.messegeArray=[];
     for(let data in messeges){
       if(this.currentUser==messeges[data].msguserId){
@@ -51,21 +50,19 @@ export class UserDetailsPage {
     console.log('ionViewDidLoad UserDetailsPage');
   }
   sendMsg(){
-    
     const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.currentUser);
     personRef.on('value', personSnapshot => {
     console.log(personSnapshot.val()); 
     this.messegeUserName=personSnapshot.val().username;
-    console.log(this.messegeUserName)
+    console.log(this.messegeUserName);
     });
-    
-  
     firebase.database().ref('/userProfile/' + this.userDetails.userId+ "/messege/").push({
       userMessege:this.userMsg,
       msguserId:this.currentUser,
       messegeUser:this.messegeUserName
       
     })
+    console.log(this.messegeUserName);
     console.log(this.userMsg);
     this.userMsg='';
     
