@@ -4,6 +4,7 @@ import { HomePage } from '../home/home';
 import { RegistrationPage } from '../registration/registration';
 import * as firebase from 'firebase';
 import { ListPage } from '../list/list';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ export class LoginPage {
   public email:any;
   public username:any;
   public password:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -57,6 +58,40 @@ export class LoginPage {
         })
       }
    
+  }
+  forgotPass(){
+    // alert("how can u forget ur password?");
+
+    let prompt = this.alertCtrl.create({
+      title: 'Login',
+      message: "Enter a name for this new album you're so keen on adding",
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'enter your email'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Send',
+          handler: data => {
+            console.log(data);                                                       
+            console.log(data.email);
+           return firebase.auth().sendPasswordResetEmail(data.email)
+            .then(() => alert("email sent"))
+            .catch((error) => alert(error))
+          }
+        }
+      ]
+    });
+    prompt.present();
+
   }
 
   // initializeApp() {

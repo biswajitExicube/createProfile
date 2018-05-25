@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPageModule } from '../pages/login/login.module';
+import { ProfilePageModule } from '../pages/profile/profile.module'
 import { RegistrationPageModule } from '../pages/registration/registration.module';
 import { UserDetailsPageModule } from '../pages/user-details/user-details.module';
 
@@ -38,6 +39,7 @@ firebase.initializeApp(config);
     IonicModule.forRoot(MyApp),
     LoginPageModule,
     RegistrationPageModule,
+    ProfilePageModule,
     UserDetailsPageModule
   ],
   bootstrap: [IonicApp],

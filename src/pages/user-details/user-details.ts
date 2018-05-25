@@ -36,6 +36,10 @@ import { LoginPage } from '../login/login';
 
     this.homeParam = this.navParams.get('huserData');
     this.listParam = this.navParams.get('userData');
+
+    //We can use this way//
+
+
     //  if(this.homeParam != undefined || this.listParam != undefined){
      
     //    this.userDetails=this.homeParam?this.homeParam : this.listParam 
@@ -56,6 +60,8 @@ import { LoginPage } from '../login/login';
     //    })
      
     //  }
+    
+
     if(this.homeParam){
       this.userDetails=this.homeParam;
       console.log(this.userDetails);

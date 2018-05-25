@@ -29,6 +29,7 @@ export class HomePage {
     if(personSnapshot.val()){
       // console.log(personSnapshot.val().messege);
         let messeges=personSnapshot.val().messege;
+        // console.log(messeges);
         this.messegeArray=[];
         for(let data in messeges){
         messeges[data].msgId=data;
@@ -37,7 +38,7 @@ export class HomePage {
         } 
       }
       this.loading.dismiss();
-      // console.log(this.messegeArray);
+      console.log(this.messegeArray);
   }
   else{
     this.loading.dismiss();
