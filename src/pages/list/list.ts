@@ -27,7 +27,7 @@ constructor(public navCtrl: NavController, public navParams: NavParams,public lo
   },1000), 
 
   this.loadUser();   
-}
+  }
 
   loadUser(){
     const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`);
@@ -56,7 +56,7 @@ constructor(public navCtrl: NavController, public navParams: NavParams,public lo
 
   logOut(){
     this.navCtrl.setRoot(LoginPage);
-    firebase.auth().signOut
+    firebase.auth().signOut();
   }
  
 }

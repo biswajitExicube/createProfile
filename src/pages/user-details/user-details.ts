@@ -17,6 +17,9 @@ import { LoginPage } from '../login/login';
   public userMessegeId:any;
   public messegeUserName:any;
   public currentUser:any
+  homeParam:any;
+  listParam:any;
+  public homeUserDetails:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
     
     let loading = this.loadingCtrl.create({
@@ -30,24 +33,68 @@ import { LoginPage } from '../login/login';
   
     this.currentUser = firebase.auth().currentUser.uid;
     console.log(this.currentUser);
-    this.userDetails = this.navParams.get('userData');
-    console.log(this.userDetails);
-    const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.userDetails.userId);
-    personRef.on('value', personSnapshot => {
-    console.log(personSnapshot.val());
-    
-    let messeges=personSnapshot.val().messege
-    this.messegeArray=[];
-    for(let data in messeges){
-      if(this.currentUser==messeges[data].msguserId){
-      this.messegeArray.push(messeges[data]);
+
+    this.homeParam = this.navParams.get('huserData');
+    this.listParam = this.navParams.get('userData');
+    //  if(this.homeParam != undefined || this.listParam != undefined){
+     
+    //    this.userDetails=this.homeParam?this.homeParam : this.listParam 
+    //    console.log(this.userDetails);
+
+    //    const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.userDetails.userId);
+    //    personRef.on('value', personSnapshot => {
+    //     console.log(personSnapshot.val());
+    //     let messeges=personSnapshot.val().messege;
+    //     this.messegeArray=[];
+    //     for(let data in messeges){
+    //       if(this.currentUser==messeges[data].msguserId){
+    //         this.messegeArray.push(messeges[data]);
+    //       }
+    //       console.log(this.messegeArray);
+    //     }
+
+    //    })
+     
+    //  }
+    if(this.homeParam){
+      this.userDetails=this.homeParam;
+      console.log(this.userDetails);
+      const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.userDetails.userId);
+       personRef.on('value', personSnapshot => {
+        console.log(personSnapshot.val());
+        let messeges=personSnapshot.val().messege;
+        this.messegeArray=[];
+        for(let data in messeges){
+          if(this.currentUser==messeges[data].msguserId){
+            this.messegeArray.push(messeges[data]);
+          }
+          console.log(this.messegeArray);
+        }
+        
+       })
     }
-    console.log(this.messegeArray);
-  }
-    });
+    else{
+      this.userDetails=this.listParam;
+      console.log(this.userDetails);
+      const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.userDetails.userId);
+      personRef.on('value', personSnapshot => {
+       console.log(personSnapshot.val());
+       let messeges=personSnapshot.val().messege;
+       this.messegeArray=[];
+       for(let data in messeges){
+         if(this.currentUser==messeges[data].msguserId){
+           this.messegeArray.push(messeges[data]);
+         }
+         console.log(this.messegeArray);
+       }
+
+      })
+
+    }
+
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserDetailsPage');
+    console.log('ionViewDidLoad UserDetailsPage'); 
   }
   sendMsg(){
     const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+this.currentUser);
@@ -64,13 +111,11 @@ import { LoginPage } from '../login/login';
     })
     console.log(this.messegeUserName);
     console.log(this.userMsg);
-    this.userMsg='';
-    
-    
+    this.userMsg='';  
   }
   logOut(){
     this.navCtrl.setRoot(LoginPage);
-    firebase.auth().signOut
+    firebase.auth().signOut();
   }
 
 }

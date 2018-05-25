@@ -24,7 +24,7 @@
 
     <ion-list>
       <ion-item-sliding *ngFor="let messege of messegeArray ; let i=index">
-        <ion-item >
+        <ion-item (click)="userInfo(messege)">
           <ion-avatar item-start>
             <img src="../../assets/imgs/user.jpg">
           </ion-avatar>
