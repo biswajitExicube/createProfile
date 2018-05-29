@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import * as firebase from 'firebase'
+import firebase from 'firebase/app';
+import 'firebase/auth';  
+import 'firebase/database';
 import { UserDetailsPage } from '../user-details/user-details';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { LoginPage } from '../login/login';
+declare var google:any;
 
 @Component({
   selector: 'page-list',
@@ -40,7 +43,8 @@ constructor(public navCtrl: NavController, public navParams: NavParams,public lo
      for(let k in newItem){
       newItem[k].userId = k;
       if(newItem[k].userId != currentUser){
-        this.items.push(newItem[k]);          
+        this.items.push(newItem[k]); 
+                 
        }
         console.log(this.items);
       }     

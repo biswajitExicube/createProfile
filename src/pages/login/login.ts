@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RegistrationPage } from '../registration/registration';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';  
+import 'firebase/database';
 import { ListPage } from '../list/list';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
@@ -16,6 +18,7 @@ export class LoginPage {
   public email:any;
   public username:any;
   public password:any;
+  public item:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {
   }
   ionViewDidLoad() {
@@ -35,7 +38,8 @@ export class LoginPage {
             else{
          firebase.auth().signInWithEmailAndPassword(this.email, this.password).then( user => {
           if(user){
-              var userId=user.user.uid
+            console.log(user);
+              var userId=user.uid
               const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+userId);
               personRef.on('value', personSnapshot => {
               console.log(personSnapshot.val());
@@ -47,10 +51,20 @@ export class LoginPage {
               var myData=personSnapshot.val().username;
               console.log(myData);
               localStorage.setItem("userName",myData);
+
+              // this.item=[];
+              // let userInfo=personSnapshot.val();
+              // for(let k in userInfo){
+              //   console.log(k);
+              //   userInfo[k].picId=k
+              //   this.item.push(userInfo[k]);
+              // }        
             })
             this.navCtrl.setRoot(HomePage);
           } 
         })
+
+                 
         .catch((_error) => {
           console.log(_error);
           alert(_error.message);

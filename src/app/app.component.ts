@@ -6,7 +6,9 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
-import * as firebase from 'firebase'
+import firebase from 'firebase/app';
+import 'firebase/auth';  
+import 'firebase/database';
 import { NavController } from 'ionic-angular/navigation/nav-controller';
 
 @Component({
@@ -19,6 +21,7 @@ export class MyApp {
   public userName:any;
   public email:any;
   public password:any;
+  public currentUser:any;
   rootPage;
   pages: Array<{title: string, component: any}>;
 
@@ -33,6 +36,7 @@ export class MyApp {
 
    firebase.auth().onAuthStateChanged((user)=>{
       if (user) {
+        console.log(user);
         console.log("user find");
         this.zone.run(()=>{
         this.rootPage = HomePage;

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-
-import * as firebase from 'firebase'
+import firebase from 'firebase/app';
+import 'firebase/auth';  
+import 'firebase/database';
 import { UserDetailsPage } from '../user-details/user-details';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 

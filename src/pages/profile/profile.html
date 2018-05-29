@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
     <ion-title>profile</ion-title>
   </ion-navbar>
 
@@ -14,8 +17,8 @@
 
 
 <ion-content padding>
-  <ion-item>
-      <ion-input type="text" [(ngModel)]="firstName" ></ion-input> 
+<ion-item>
+  <ion-input type="text" [(ngModel)]="firstName" ></ion-input> 
   </ion-item>
   <ion-item>
       <ion-input type="text" [(ngModel)]="lastName"></ion-input>
@@ -23,5 +26,13 @@
   <ion-item no-lines class="btnItem">
       <button ion-button large color="primary" (click)="profileUpdate()">Update</button>
       <button ion-button large color="danger">Delete</button>
+    </ion-item>
+    <ion-card-content>     
+      <ion-icon name="camera" (click)="presentActionSheet()"></ion-icon>
+    <!-- <img [src]="base64Image" *ngIf="base64Image"> -->
+    </ion-card-content>
+    <ion-item>
+      <button ion-button (click)="uploadPic()" *ngIf="base64Image">Upload</button>  
+      <img [src]="imageData" *ngIf="imageData">
     </ion-item>
 </ion-content>
