@@ -15,6 +15,7 @@ import firebase from 'firebase/app';
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
+import { Crop } from '@ionic-native/crop';
 
 // import 'firebase/auth';  
 // import 'firebase/database';
@@ -56,6 +57,7 @@ firebase.initializeApp(config);
     File,
     Transfer,
     FilePath,
+    Crop,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

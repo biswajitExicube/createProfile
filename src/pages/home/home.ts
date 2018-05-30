@@ -47,7 +47,6 @@ export class HomePage {
     })  
   }
   logOut(){
-    
     firebase.auth().signOut();
     localStorage.removeItem("userName");
     localStorage.removeItem("email");

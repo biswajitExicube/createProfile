@@ -25,7 +25,7 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
   registration(){
-    this.navCtrl.push(RegistrationPage)
+    this.navCtrl.push(RegistrationPage);
   }
   goLogin(){
           if(this.email=="" || this.email==undefined){
@@ -43,22 +43,13 @@ export class LoginPage {
               const personRef: firebase.database.Reference = firebase.database().ref(`/userProfile/`+userId);
               personRef.on('value', personSnapshot => {
               console.log(personSnapshot.val());
-
-              var email=personSnapshot.val().email;
-              // localStorage.setItem("email",this.email);
-              localStorage.setItem("email",email);
-
-              var myData=personSnapshot.val().username;
+              var myData=personSnapshot.val().firstName;
               console.log(myData);
               localStorage.setItem("userName",myData);
-
-              // this.item=[];
-              // let userInfo=personSnapshot.val();
-              // for(let k in userInfo){
-              //   console.log(k);
-              //   userInfo[k].picId=k
-              //   this.item.push(userInfo[k]);
-              // }        
+              var myNewData=personSnapshot.val().lastName;
+              console.log(myNewData[0]);
+             
+              localStorage.setItem("userLastName",myNewData[0]); 
             })
             this.navCtrl.setRoot(HomePage);
           } 

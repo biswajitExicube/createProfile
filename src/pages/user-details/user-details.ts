@@ -122,7 +122,7 @@ import { LoginPage } from '../login/login';
     this.userMsg='';  
   }
   logOut(){
-    this.navCtrl.setRoot(LoginPage);
+    // this.navCtrl.setRoot(LoginPage);
     firebase.auth().signOut();
   }
 

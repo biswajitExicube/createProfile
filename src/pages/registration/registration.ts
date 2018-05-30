@@ -16,6 +16,7 @@ export class RegistrationPage {
   public userName:any;
   public password:any;
   public email:any;
+  public user:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -41,25 +42,27 @@ export class RegistrationPage {
     else if(this.password.length<6){
       alert("password should be more than 6 characters");
     }
-  
+
     else{
     firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
     .then( newUser => {
       console.log(newUser);
-      console.log(newUser.user.uid);
-      firebase.database().ref('/userProfile/').child(newUser.user.uid).set({ 
+      console.log(newUser.uid);
+      firebase.database().ref('/userProfile/').child(newUser.uid).set({ 
         email: this.email,
         username:this.userName,
         firstName:this.firstName,
         lastName:this.lastName,
         login:true,
       });
-      console.log(newUser.user.uid);
-      this.navCtrl.setRoot(LoginPage);
+      console.log(newUser.uid);
+     
+      firebase.auth().signOut();
+      // this.user=
     });
-  }
     
 }   
   }
 
 
+}

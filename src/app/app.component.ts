@@ -17,11 +17,11 @@ import { NavController } from 'ionic-angular/navigation/nav-controller';
 export class MyApp {
 
   @ViewChild('content') navCtrl: NavController;
-  // @ViewChild(Nav) nav: Nav;
   public userName:any;
   public email:any;
   public password:any;
   public currentUser:any;
+  public userLastName:any;
   rootPage;
   pages: Array<{title: string, component: any}>;
 
@@ -34,13 +34,16 @@ export class MyApp {
       { title: 'Profile', component: ProfilePage}
     ];
 
-   firebase.auth().onAuthStateChanged((user)=>{
+  
+  
+    firebase.auth().onAuthStateChanged((user)=>{
       if (user) {
         console.log(user);
         console.log("user find");
         this.zone.run(()=>{
         this.rootPage = HomePage;
          });
+         
       }
       else{  
         console.log("user not find");
@@ -53,43 +56,24 @@ export class MyApp {
   ngDoCheck(){ 
     if(localStorage.getItem("userName")){
     this.userName=localStorage.getItem("userName");
-    // console.log(this.userName);
+  }
+    if(localStorage.getItem("userLastName")){
+    this.userLastName=localStorage.getItem("userLastName");
   }
   }
   initializeApp() { 
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-   
   }
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.navCtrl.setRoot(page.component);
   }
   ionViewDidLoad() { 
     
   } 
   ngAfterViewInit() {
-    // firebase.auth().onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     console.log("user find");
-    //     // this.zone.run(()=>{
-    //     //   // this.rootPage = HomePage;
-    //     //   // this.navCtrl.setRoot(HomePage)
-    //     // });
-    //   }
-    //   else{  
-    //     console.log("user find");
-    //     // this.zone.run(()=>{
-    //     //   // this.rootPage = LoginPage;
-    //     //   // this.navCtrl.setRoot(LoginPage)
-    //     // });
-    //   }
-    // });
   }
 
 }
